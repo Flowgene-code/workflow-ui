@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
+import { supabase } from '@/lib/supabaseClient'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -17,15 +16,21 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
-      router.push('/dashboard')
-    } catch (err) {
-      console.error(err)
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      console.error(error)
       setError('Invalid credentials. Please try again.')
-    } finally {
       setLoading(false)
+      return
     }
+
+    // Optional: You can store session or redirect based on role
+    router.push('/dashboard')
+    setLoading(false)
   }
 
   return (
