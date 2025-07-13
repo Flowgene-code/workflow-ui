@@ -1,0 +1,10 @@
+# Auto normalize line endings
+* text=auto
+
+# Force LF for these files (optional)
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.md text eol=lf
