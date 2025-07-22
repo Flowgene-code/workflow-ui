@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
-import AuthHeader from '@/components/AuthHeader'
+
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -119,7 +119,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4">
       <div className="max-w-md w-full bg-white p-6 rounded-xl shadow-md">
-        <AuthHeader />
+        <Header />
         <h2 className="text-xl font-semibold text-center mb-4">Create an Account</h2>
 
         <form onSubmit={handleRegister} className="space-y-4">

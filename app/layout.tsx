@@ -1,34 +1,28 @@
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+// app/layout.tsx
 import "./globals.css"
-import { UserProvider } from '@/context/UserContext'
+import { Inter } from "next/font/google"
+import { cn } from "@/lib/utils"
+import { ThemeProvider } from "@/components/theme-provider"
+import { UserProvider } from "@/context/UserContext"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-})
+const inter = Inter({ subsets: ["latin"] })
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
-
-export const metadata: Metadata = {
-  title: "FlowGenie",
-  description: "Simplify approvals. Automate everything",
+export const metadata = {
+  title: "Your App",
+  description: "SaaS Workflow Automation App",
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <UserProvider>
-          {children}
-        </UserProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <UserProvider>
+            <main className="flex items-center justify-center min-h-screen p-4">
+              {children}
+            </main>
+          </UserProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "types": ["tailwindcss"]
+  },
+  "include": ["tailwind.config.ts", "app", "components", "src"]
+}
